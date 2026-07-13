@@ -1,0 +1,38 @@
+@TodoApi_HostAddress = https://localhost:7120
+
+GET {{TodoApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+POST {{TodoApi_HostAddress}}/todoitems
+Content-Type: application/json
+
+  {
+    "name":"walk dog",
+    "isComplete":true
+  }
+###
+
+POST {{TodoApi_HostAddress}}/Blogs
+Content-Type: application/json
+
+{
+  "url": "https://myblog.com",
+  "posts": [
+    {
+      "title": "First Post",
+      "content": "Hello World!"
+    },
+    {
+      "title": "Second Post",
+      "content": "Entity Framework Core is awesome."
+    }
+  ]
+}
+###
+
+
+
+
+###

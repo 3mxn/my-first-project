@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Services2/Services2.csproj" />
+  <Project Path="TodoApi/TodoApi.csproj" />
+</Solution>
