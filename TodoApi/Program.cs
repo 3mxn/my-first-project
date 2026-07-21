@@ -3,7 +3,21 @@ using Services;
 using TodoApi;
 var builder = WebApplication.CreateBuilder();
 //builder.Services.AddDbContext<Tododb>(opt => opt.UseInMemoryDatabase("TodoList"));
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin();
+
+                                             
+                      });
+});
 var app = builder.Build();
+app.UseCors(MyAllowSpecificOrigins);
+
+
 //app.MapGet("/todoitems", async (Tododb db) =>
 //await db.Todos.ToListAsync());
 //var todoItems = app.MapGroup("todoitems");
@@ -69,5 +83,11 @@ app.MapPost("/Blogs/", async (BlogDto blog) =>
     await service.AddBlog(blog);
 
     return Results.Created($"/todoitems/1", blog);
+});
+app.MapGet("/Blogs/", async () =>
+{
+    var service = new BlogService();
+    return Results.Ok(await service.GetAll());
+    
 });
 app.Run();

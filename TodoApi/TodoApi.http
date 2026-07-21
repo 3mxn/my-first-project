@@ -31,8 +31,14 @@ Content-Type: application/json
   ]
 }
 ###
+###
 
 
 
+
+
+###
+
+GET {{TodoApi_HostAddress}}/Blogs
 
 ###

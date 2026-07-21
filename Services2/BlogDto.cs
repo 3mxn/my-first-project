@@ -8,7 +8,7 @@ namespace Services
     {
         public int BlogId { get; set; }
         public string? Url { get; set; }
-        public List<PostDto> Posts { get; } = new();
+        public List<PostDto> Posts { get; set; }
     }
     public class PostDto
     {
