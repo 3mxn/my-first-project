@@ -9,12 +9,15 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.AllowAnyOrigin();
+                          policy.AllowAnyOrigin()
+                                .AllowAnyHeader()
+                                .AllowAnyMethod(); 
 
                                              
                       });
 });
 var app = builder.Build();
+Console.WriteLine("API restarted with new CORS settings");
 app.UseCors(MyAllowSpecificOrigins);
 
 
