@@ -93,4 +93,40 @@ app.MapGet("/Blogs/", async () =>
     return Results.Ok(await service.GetAll());
     
 });
+app.MapGet("/Blogs/{id}", async (int id) =>
+{
+    var service = new BlogService();
+    var blog=await service.GetById(id);
+    if (blog==null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(blog);
+
+});
+app.MapPut("/Blogs/{id}", async (int id, Blog updatedBlog) =>
+{
+    using var db = new BloggingContext();
+    var blog = await db.Blogs.FindAsync(id);
+    if (blog == null)
+    {
+        return Results.NotFound();
+    }
+    blog.Url = updatedBlog.Url;
+    await db.SaveChangesAsync();
+    return Results.Ok(blog);
+}
+);
+app.MapDelete("/Blogs/{id}", async (int id) =>
+{
+    var db = new BloggingContext();
+    var blog = await db.Blogs.FindAsync(id);
+    if(blog==null)
+    {
+        return Results.NotFound();
+    }
+    db.Blogs.Remove(blog);
+    await db.SaveChangesAsync();
+    return Results.Ok();
+});
 app.Run();

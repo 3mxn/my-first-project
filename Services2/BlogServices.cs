@@ -33,8 +33,14 @@ namespace Services
                 blog.Posts.Add(new Post { Title = item.Title, Content = item.Content });
 
             }
+      
             db.SaveChanges();
 
+        }
+        public async Task<Blog> GetById(int id)
+        {
+            using var db = new BloggingContext();
+            return await db.Blogs.FindAsync(id);
         }
     }
 
